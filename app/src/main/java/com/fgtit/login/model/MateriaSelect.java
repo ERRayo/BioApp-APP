@@ -4,10 +4,12 @@ public class MateriaSelect {
 
     int idGrupo;
     String materia;
+    String aula;
 
-    public MateriaSelect(int idGrupo, String materia) {
+    public MateriaSelect(int idGrupo, String materia, String aula) {
         this.idGrupo = idGrupo;
         this.materia = materia;
+        this.aula = aula;
     }
 
     public int getIdGrupo() {
@@ -25,6 +27,10 @@ public class MateriaSelect {
     public void setMateria(String materia) {
         this.materia = materia;
     }
+
+    public String getAula() { return aula; }
+
+    public void setAula(String aula) { this.aula = aula; }
 
     @Override
     public String toString() {

@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class WebAPI implements API {
 
-    public static final String BASE_URL = "http://192.168.0.4:5000/";
+    public static final String BASE_URL = "http://192.168.0.7:5000/";
 
     private final Application mApplication;
 
@@ -389,14 +389,13 @@ public class WebAPI implements API {
     }
 
     //--- Registrar Asistencia
-    public void asistencia(int idGrupo, int idPrefecto, String aula, String descripcion, boolean estadoAssis, APIListener listener) {
+    public void asistencia(int idGrupo, int idPrefecto, String descripcion, boolean estadoAssis, APIListener listener) {
         String url = BASE_URL + "asistencia";
 
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("id_grupo", idGrupo);
             jsonObject.put("id_prefecto", idPrefecto);
-            jsonObject.put("aula", aula);
             jsonObject.put("descripcion", descripcion);
             jsonObject.put("asistencia_estado", estadoAssis);
 

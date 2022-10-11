@@ -33,7 +33,7 @@ import java.util.List;
 public class Admin extends AppCompatActivity {
 
     RequestQueue mRequestQueue;
-    String BASE_URL = "http://192.168.0.4:5000/";
+    String BASE_URL = "http://192.168.0.7:5000/";
     private ListView lstProfesores;
     ArrayList<String> datos = new ArrayList<String>();
     List<Profesor> listProfesor = new ArrayList<>();

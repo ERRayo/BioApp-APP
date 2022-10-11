@@ -159,8 +159,8 @@ public class Model {
         this.mMateria = materia;
     }
     //--- Registro de asistencia -------------------------------------------------------------------
-    public void asistencia(int idGrupo, int idPrefecto, String aula, String descripcion, boolean estadoAssis, final APIListener listener) {
-        mApi.asistencia(idGrupo, idPrefecto, aula, descripcion, estadoAssis, listener);
+    public void asistencia(int idGrupo, int idPrefecto, String descripcion, boolean estadoAssis, final APIListener listener) {
+        mApi.asistencia(idGrupo, idPrefecto, descripcion, estadoAssis, listener);
     }
 
     public Asistencia getAsistencia() {

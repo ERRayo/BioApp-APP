@@ -19,7 +19,7 @@ public interface API {
 
     void grupo(int idProfesor, int idPeriodo, APIListener listener);
 
-    void asistencia(int idGrupo, int idPrefecto, String aula, String descripcion, boolean estadoAssis, APIListener listener);
+    void asistencia(int idGrupo, int idPrefecto, String descripcion, boolean estadoAssis, APIListener listener);
 
     void profesorId(int id_profesor, APIListener listener);
 

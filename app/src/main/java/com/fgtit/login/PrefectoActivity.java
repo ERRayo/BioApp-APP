@@ -223,6 +223,7 @@ public class PrefectoActivity extends AppCompatActivity {
     private int idPrefecto;
     private int idGrupo;
     private int idGrupoAux;
+    private String aulaAux;
     private int idProfesor;
     private EditText txtNombreProfesor;
     private EditText txtMateria;
@@ -311,13 +312,12 @@ public class PrefectoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String aula = txtAula.getText().toString();
                 String descripcion = txtDescripcion.getText().toString();
 
                 validar();
 
                 final Model model = Model.getInstance(PrefectoActivity.this.getApplication());
-                model.asistencia(idGrupo, idPrefecto, aula, descripcion, estadoAssis, new AbstractAPIListener() {
+                model.asistencia(idGrupo, idPrefecto, descripcion, estadoAssis, new AbstractAPIListener() {
                     @Override
                     public void onAsistencia(Asistencia asistencia) {
                         model.setAsistencia(asistencia);
@@ -334,7 +334,7 @@ public class PrefectoActivity extends AppCompatActivity {
             public void onPeriodo(Periodo periodo) {
                 model.setPerido(periodo);
                 idPeriodo = periodo.getId();
-                AddStatusList("id Periodo: " + periodo.getId() + "Fecha inicio: " + periodo.getFecha_ini() + " Fecha fin: " + periodo.getFecha_fin());
+                AddStatusList("Periodo: " + periodo.getFecha_ini() + " - " + periodo.getFecha_fin());
 
             }
         });
@@ -343,7 +343,7 @@ public class PrefectoActivity extends AppCompatActivity {
             @Override
             public void onUserAcceess(UserAccess userAccess) {
                 model.setUserAccess(userAccess);
-                AddStatusList("id user: " + userAccess.getId() + "email: " + userAccess.getEmail() );
+                //AddStatusList("id user: " + userAccess.getId() + "email: " + userAccess.getEmail() );
 
                 //---Se obtiene el id del prefecto ---------------------------------------------------------
                 model.prefectoIdUser(userAccess.getId(), new AbstractAPIListener() {
@@ -351,7 +351,7 @@ public class PrefectoActivity extends AppCompatActivity {
                     public void onPrefecto(Prefecto prefecto) {
                         model.setPrefecto(prefecto);
                         idPrefecto = prefecto.getId();
-                        AddStatusList("id prefecto: " + prefecto.getId() + "Nombre: " + prefecto.getNombre() );
+                        AddStatusList("Prefecto: " + prefecto.getNombre() + " " + prefecto.getApellidoP() + " " + prefecto.getApellidoM());
                     }
                 });
 
@@ -745,7 +745,7 @@ public class PrefectoActivity extends AppCompatActivity {
      */
 
     RequestQueue mRequestQueue;
-    String BASE_URL = "http://192.168.0.4:5000/";
+    String BASE_URL = "http://192.168.0.7:5000/";
     String url = BASE_URL + "huella";
 
 
@@ -926,17 +926,25 @@ public class PrefectoActivity extends AppCompatActivity {
                                                     int ret2 = FPMatch.getInstance().MatchFingerData( data2,
                                                             mMatData);
 
-                                                    AddStatusList("Derecha ret = " + ret);
-                                                    AddStatusList("Izquierda ret = " + ret2);
+                                                    //AddStatusList("Derecha ret = " + ret);
+                                                    //AddStatusList("Izquierda ret = " + ret2);
 
                                                     if (ret > 70 ||  ret2  > 70) {
-                                                        AddStatusList("Match OK,Finger = " + obj.getInt("id_profesor") + "!!");
+                                                        String dedo = "";
+                                                        if(ret > 70) {
+                                                            dedo = "Huella principal";
+                                                        } else if (ret2 > 70) {
+                                                            dedo = "Huella secundaria";
+                                                        }
+                                                        AddStatusList("Coincidencia identificada:  " + dedo + "!!");
                                                         idProfesor = obj.getInt("id_profesor");
                                                         matchFlag[0] = true;
                                                         //--- Se agrega el nombre del profesor
                                                         JSONObject profesorObj = obj.getJSONObject("profesor");
                                                         txtNombreProfesor.setText(profesorObj.getString("nombre") + " " + profesorObj.getString("apellido_paterno") + " " + profesorObj.getString("apellido_materno"), TextView.BufferType.EDITABLE);
+
                                                         estadoAssisTrue.setChecked(true);
+
                                                         final Model model = Model.getInstance(PrefectoActivity.this.getApplication());
                                                         model.grupo(profesorObj.getInt("id"), idPeriodo, new AbstractAPIListener() {
                                                            @Override
@@ -944,7 +952,9 @@ public class PrefectoActivity extends AppCompatActivity {
                                                                model.setGrupo(grupo);
                                                                idGrupo = grupo.getId();
                                                                idGrupoAux = idGrupo;
+                                                               aulaAux = grupo.getAula();
 
+                                                               txtAula.setText(grupo.getAula(), TextView.BufferType.EDITABLE);
                                                            }
                                                            @Override
                                                             public void onMateria(Materia materia) {
@@ -953,6 +963,9 @@ public class PrefectoActivity extends AppCompatActivity {
 
                                                            }
                                                         });
+
+                                                        txtAula.setText( aulaAux, TextView.BufferType.EDITABLE);
+
                                                         comboMaterias.add("Materias: ");
 
                                                         String url2 = BASE_URL + "grupo/profesor/" +  idProfesor + "/" + idPeriodo;
@@ -964,13 +977,13 @@ public class PrefectoActivity extends AppCompatActivity {
                                                                     for (int j = 0; j < response.length(); j++) {
                                                                         JSONObject obj = response.getJSONObject(j);
                                                                         int idGrupoAux = obj.getInt("id");
+                                                                        String aulaAuxComboBox = obj.getString("aula");
+
                                                                         JSONObject materiaObj = obj.getJSONObject("materia");
                                                                         String nombreMateria = materiaObj.getString("nombre");
                                                                         comboMaterias.add("ID: "+ idGrupoAux +" - "+ materiaObj.getString("nombre"));
-                                                                        materiaS.add(new MateriaSelect(idGrupoAux,nombreMateria));
+                                                                        materiaS.add(new MateriaSelect(idGrupoAux,nombreMateria, aulaAuxComboBox));
                                                                     }
-
-
 
                                                                     ArrayAdapter<MateriaSelect> adapter = new ArrayAdapter<>(PrefectoActivity.this, R.layout.spinner_items, materiaS);
 
@@ -984,8 +997,6 @@ public class PrefectoActivity extends AppCompatActivity {
 
                                                                     materiasBox.setSelection(posicionMateria);
 
-
-
                                                                     materiasBox.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                                         @Override
                                                                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -993,6 +1004,7 @@ public class PrefectoActivity extends AppCompatActivity {
                                                                             materiaSelect = parent.getItemAtPosition(position).toString();
 
                                                                             idGrupo = materiaS.get(position).getIdGrupo();
+                                                                            txtAula.setText(materiaS.get(position).getAula(), TextView.BufferType.EDITABLE);
                                                                             if (idGrupoAux != materiaS.get(position).getIdGrupo()) {
                                                                                 estadoAssisFalse.setChecked(true);
 

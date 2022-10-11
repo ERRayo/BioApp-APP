@@ -9,13 +9,15 @@ public class Grupo {
     private int idProfesor;
     private int idMateria;
     private int idPeriodo;
+    private String aula;
     private boolean estadoGrupo;
 
-    public Grupo(int id, int idProfesor, int idMateria, int idPeriodo, boolean estadoGrupo) {
+    public Grupo(int id, int idProfesor, int idMateria, int idPeriodo, String aula, boolean estadoGrupo) {
         this.id = id;
         this.idProfesor = idProfesor;
         this.idMateria = idMateria;
         this.idPeriodo = idPeriodo;
+        this.aula = aula;
         this.estadoGrupo = estadoGrupo;
     }
 
@@ -24,9 +26,10 @@ public class Grupo {
         int idProfesor = jsonObject.getInt("id_profesor");
         int idMateria = jsonObject.getInt("id_materia");
         int idPeriodo = jsonObject.getInt("id_periodo");
+        String aula = jsonObject.getString("aula");
         boolean estadoGrupo = jsonObject.getBoolean("grupo_estado");
 
-        Grupo grupo = new Grupo(id, idProfesor, idMateria, idPeriodo, estadoGrupo);
+        Grupo grupo = new Grupo(id, idProfesor, idMateria, idPeriodo, aula, estadoGrupo);
 
         return grupo;
     }
@@ -62,6 +65,10 @@ public class Grupo {
     public void setIdPeriodo(int idPeriodo) {
         this.idPeriodo = idPeriodo;
     }
+
+    public String getAula() { return aula; }
+
+    public void setAula(String aula) { this.aula = aula; }
 
     public boolean isEstadoGrupo() {
         return estadoGrupo;

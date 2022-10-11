@@ -190,7 +190,7 @@ public class BluetoothReaderService {
         // Send a failure message back to the Activity
         Message msg = mHandler.obtainMessage(BluetoothReader.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(BluetoothReader.TOAST, "Unable to connect device");
+        bundle.putString(BluetoothReader.TOAST, "No se puedo establecer conexión con el dispositivo");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }
@@ -204,7 +204,7 @@ public class BluetoothReaderService {
         // Send a failure message back to the Activity
         Message msg = mHandler.obtainMessage(BluetoothReader.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(BluetoothReader.TOAST, "Device connection was lost");
+        bundle.putString(BluetoothReader.TOAST, "Conexión con el dispositivo perdida");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
     }

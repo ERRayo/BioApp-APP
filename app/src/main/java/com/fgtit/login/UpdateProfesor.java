@@ -705,7 +705,7 @@ public class UpdateProfesor extends AppCompatActivity {
             case CMD_PASSWORD:
                 break;
             case CMD_ENROLHOST:
-                AddStatusList("Enrol Template ...");
+                AddStatusList("Enrolando Plantilla ...");
                 break;
             case CMD_GETSN:
                 AddStatusList("Get Device SN ...");
@@ -863,21 +863,21 @@ public class UpdateProfesor extends AppCompatActivity {
                                             if (Integer.toHexString(b).length()== 1) huella1 += "0";
                                             huella1 += Integer.toHexString(b);
                                         }
-                                        AddStatusList("Se guarda huella 1");
+                                        AddStatusList("Huella principal enrolada");
                                     } else if (contHuella == 1) {
                                         for (byte aux2 : mRefData) {
                                             int b2 = aux2 & 0xff;
                                             if (Integer.toHexString(b2).length()== 1) huella2 += "0";
                                             huella2 += Integer.toHexString(b2);
                                         }
-                                        AddStatusList("Se guarda huella 2");
+                                        AddStatusList("Huella secundaria enrolada");
                                     }
                                     contHuella++;
                                 } else {
                                     AddStatusList("Huellas asignadas!");
                                 }
 
-                                AddStatusList("Enrol Succeed with finger: " + userId);
+
                                 userId += 1;
 
                             } else if (mCmdData[7] == 2) {

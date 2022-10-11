@@ -2,36 +2,36 @@
 
     <string name="app_name">Assis UAA</string>
 
-    <string name="connect_a_device">Connect a device</string>
-    <string name="make_discoverable">Make discoverable</string>
+    <string name="connect_a_device">Conecte un dispositivo</string>
+    <string name="make_discoverable">Emparejar un dispositivo</string>
 
     <!--  BluetoothChat -->
     <string name="send">Send</string>
-    <string name="not_connected">You are not connected to a device</string>
-    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
-    <string name="title_connecting">connecting...</string>
-    <string name="title_connected_to">connected: </string>
-    <string name="title_not_connected">not connected</string>
+    <string name="not_connected">No estas conectado a un dispositivo</string>
+    <string name="bt_not_enabled_leaving">Bluetooth no estaba habilitado. Saliendo del chat de Bluetooth.</string>
+    <string name="title_connecting">conectando...</string>
+    <string name="title_connected_to">conecte: </string>
+    <string name="title_not_connected">no conectado</string>
 
     <!--  DeviceListActivity -->
-    <string name="scanning">scanning for devices...</string>
-    <string name="select_device">select a device to connect</string>
-    <string name="none_paired">No devices have been paired</string>
-    <string name="none_found">No devices found</string>
-    <string name="title_paired_devices">Paired Devices</string>
-    <string name="title_other_devices">Other Available Devices</string>
-    <string name="button_scan">Scan for devices</string>
+    <string name="scanning">buscando dispositivos...</string>
+    <string name="select_device">seleccione un dispositivo</string>
+    <string name="none_paired">No se han emparejado dispositivo</string>
+    <string name="none_found">dispositivo no encontrado</string>
+    <string name="title_paired_devices">Dispositivos emparejados</string>
+    <string name="title_other_devices">Otros dispositivos disponibles</string>
+    <string name="button_scan">Buscar dispositivos</string>
 
     <!-- Options Menu -->
-    <string name="connect">Connect a device</string>
-    <string name="discoverable">Make discoverable</string>
+    <string name="connect">Conectar dispositivo</string>
+    <string name="discoverable">Hacer que sea reconocible</string>
 
     <string name="EnrolID">Enrol ID</string>
     <string name="Verify">Verify ID</string>
     <string name="Identify">Search</string>
     <string name="DeleteID">Delete ID</string>
     <string name="ClearID">Clear</string>
-    <string name="EnrolHost">Enrol Template</string>
+    <string name="EnrolHost">Enrolar Plantilla</string>
     <string name="CaptureHost">Capture Template</string>
     <string name="Match">Match Template</string>
     <string name="WriteFPCard">Write FP Card</string>
